@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="32dp"
+        android:layout_height="37dp"
+        android:text="0"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Plus"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textView"
+        app:layout_constraintHorizontal_bias="0.708"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:text="Minus"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.063"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+  KT Code:
+package com.example.counter
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
+import com.example.viewModelDemo.viewmodelDemo
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+
+
+        var textView:TextView=findViewById(R.id.textView)
+
+        var button:Button=findViewById(R.id.button)
+        var button1:Button=findViewById(R.id.button2)
+
+
+
+        var viewModel:viewmodelDemo= ViewModelProvider(this).get(viewmodelDemo::class.java)
+
+        // setting text view
+        textView.text = viewModel.number.toString()
+
+        //handling button click event
+        button.setOnClickListener {
+            viewModel.Plus()
+            textView.text = viewModel.number.toString()
+        }
+        button1.setOnClickListener {
+            viewModel.Minus()
+            textView.text = viewModel.number.toString()
+        }
+    }
+}
+
+viewModelDemo.kt:
+
+package com.example.viewModelDemo
+
+    import androidx.lifecycle.ViewModel
+
+    class viewmodelDemo: ViewModel() {
+
+
+        var number = 0
+
+        fun Plus() {
+            number++
+        }
+        fun Minus() {
+            number--
+        }
+    }
