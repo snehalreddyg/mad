@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="change wallpaper"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+KT code:
+
+package com.example.wallpaper
+
+
+import android.app.WallpaperManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.widget.Button
+
+class MainActivity : AppCompatActivity() {
+    var mywallpaperlist= arrayOf(
+        R.drawable.g,R.drawable.h)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        var btn:Button=findViewById(R.id.button)
+        btn.setOnClickListener{
+            setWallpaper()
+        }
+
+    }
+    private fun setWallpaper(){
+        Handler(Looper.getMainLooper()).postDelayed({
+            for (i in mywallpaperlist){
+            val bitmap:Bitmap=BitmapFactory.decodeResource(resources,i)
+                val wallpapermanager=WallpaperManager.getInstance(applicationContext)
+                wallpapermanager.setBitmap(bitmap)
+        }
+        },2000)
+    }
+}
