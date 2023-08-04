@@ -1,0 +1,175 @@
+ACTIVITY_MAIN.XML:
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout 
+xmlns:android="http://schemas.android.com/apk/res/android"
+ xmlns:app="http://schemas.android.com/apk/res-auto"
+ xmlns:tools="http://schemas.android.com/tools"
+ android:layout_width="match_parent"
+ android:layout_height="match_parent"
+ tools:context=".MainActivity">
+ <androidx.recyclerview.widget.RecyclerView
+ android:layout_width="408dp"
+ android:layout_height="732dp"
+ android:id="@+id/recyclerView"
+ app:layout_constraintBottom_toBottomOf="parent"
+ app:layout_constraintEnd_toEndOf="parent"
+ app:layout_constraintStart_toStartOf="parent"
+ app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+MAINACTIVITY.kt
+package com.example.newrecyclerviewdemo
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+class MainActivity : AppCompatActivity() {
+ override fun onCreate(savedInstanceState: Bundle?) {
+ super.onCreate(savedInstanceState)
+ setContentView(R.layout.activity_main)
+ // getting the recyclerview by its id
+ var recycView:RecyclerView=findViewById(R.id.recyclerView)
+ // this creates a vertical layout Manager
+ recycView.layoutManager=LinearLayoutManager(this)
+ // ArrayList of class list_itemclass
+ var data=ArrayList<list_itemclass>()
+ // This will pass the ArrayList to our Adapter
+ var adapter=myAdapter(data)
+ // Setting the Adapter with the recyclerview
+ recycView.adapter = adapter
+ var lpaes=list_itemclass(R.drawable.lpaes,"Leander Peas ","Indian tennis 
+player" )
+ var msd=list_itemclass(R.drawable.msd,"Mahendra singh dhoni ","Indian 
+cricket player ")
+ var Rohit=list_itemclass(R.drawable.lpaes,"Rohith sharma ","Indian 
+cricket player" )
+ var sindhu=list_itemclass(R.drawable.sindhu,"PV sindhu ","Indian 
+Badminton player" )
+ var kohli=list_itemclass(R.drawable.virat,"Virat Kohli ","Indian cricket 
+player" )
+ var smriti=list_itemclass(R.drawable.lpaes,"smriti Mandana ","Indian 
+Womens Cricket player" )
+ var lpaes1=list_itemclass(R.drawable.lpaes,"Leander Peas ","Indian tennis 
+player" )
+ var msd1=list_itemclass(R.drawable.msd,"Mahendra singh dhoni ","Indian 
+cricket player ")
+ var Rohit1=list_itemclass(R.drawable.lpaes,"Rohith sharma ","Indian 
+cricket player" )
+ var sindhu1=list_itemclass(R.drawable.sindhu,"PV sindhu ","Indian 
+Badminton player" )
+ var kohli1=list_itemclass(R.drawable.virat,"Virat Kohli ","Indian cricket 
+player" )
+ var smriti1=list_itemclass(R.drawable.lpaes,"smriti Mandana ","Indian 
+Womens Cricket player" )
+ data.add(lpaes)
+ data.add(msd)
+ data.add(Rohit)
+ data.add(sindhu)
+ data.add(kohli)
+ data.add(smriti)
+ data.add(lpaes1)
+ data.add(msd1)
+ data.add(Rohit1)
+ data.add(sindhu1)
+ data.add(kohli1)
+ data.add(smriti1)
+ }
+}
+Right Click on "Layout"----> Select "New" Option ----> Select 
+"Layout Resource File"---> Create a new xml file as follows:
+single_row_item.xml:
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView 
+xmlns:android="http://schemas.android.com/apk/res/android"
+ xmlns:tools="http://schemas.android.com/tools"
+ android:layout_width="match_parent"
+ android:layout_height="wrap_content"
+ xmlns:app="http://schemas.android.com/apk/res-auto">
+ <androidx.constraintlayout.widget.ConstraintLayout
+ android:layout_width="match_parent"
+ android:layout_height="123dp">
+ <ImageView
+ android:id="@+id/imageView"
+ android:layout_width="104dp"
+ android:layout_height="68dp"
+ android:layout_marginTop="16dp"
+ android:layout_weight="1"
+ app:layout_constraintEnd_toEndOf="parent"
+ app:layout_constraintHorizontal_bias="0.018"
+ app:layout_constraintStart_toStartOf="parent"
+ app:layout_constraintTop_toTopOf="parent" />
+ <TextView
+ android:id="@+id/textView"
+ android:layout_width="186dp"
+ android:layout_height="45dp"
+ android:layout_marginStart="41dp"
+ android:layout_marginTop="8dp"
+ android:layout_weight="1"
+ android:gravity="center"
+ android:text="PV Sindhu"
+ android:textColor="@color/purple_200"
+ android:textSize="20dp"
+ app:layout_constraintEnd_toEndOf="parent"
+ app:layout_constraintHorizontal_bias="0.0"
+ app:layout_constraintStart_toEndOf="@+id/imageView"
+ app:layout_constraintTop_toBottomOf="@+id/textView1" />
+ <TextView
+ android:id="@+id/textView1"
+ android:layout_width="186dp"
+ android:layout_height="37dp"
+ android:layout_marginTop="24dp"
+ android:layout_weight="1"
+ android:gravity="center"
+ android:text="PV Sindhu"
+ android:textColor="@color/purple_200"
+ android:textSize="20dp"
+ app:layout_constraintEnd_toEndOf="parent"
+ app:layout_constraintHorizontal_bias="0.19"
+ app:layout_constraintStart_toEndOf="@+id/imageView"
+ app:layout_constraintTop_toTopOf="parent" />
+ </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
+Right Click on "app"----> Select "New" Option ----> Select "Kotlin 
+Class / File"---> Create new 3 kotlin files as follows:
+myViewHolder.kt
+package com.example.newrecyclerviewdemo
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+class myViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+ var img:ImageView=itemView.findViewById(R.id.imageView)
+ var txtV: TextView =itemView.findViewById(R.id.textView)
+ var txtV1:TextView=itemView.findViewById(R.id.textView1)
+}
+list_itemclass.kt
+package com.example.newrecyclerviewdemo
+class list_itemclass(var img1:Int,var txtV1:String,var txtV2:String) {
+}
+myAdapter.kt
+package com.example.newrecyclerviewdemo
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
+class myAdapter(var mylist:List<list_itemclass>): 
+RecyclerView.Adapter<myViewHolder>() {
+ override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): 
+myViewHolder {
+ // inflates the card_view_design view
+ // that is used to hold list item
+ val view = LayoutInflater.from(parent.context)
+ .inflate(R.layout.single_row_item, parent, false)
+ return myViewHolder(view)
+ }
+ override fun getItemCount(): Int {
+ return mylist.size
+ }
+ override fun onBindViewHolder(holder: myViewHolder, position: Int) {
+ val LC = mylist[position]
+ // sets the image to the imageview from our itemHolder class
+ holder.img.setImageResource(LC.img1)
+ holder.txtV.text = LC.txtV1
+ holder.txtV1.text = LC.txtV2
+ }
+}
